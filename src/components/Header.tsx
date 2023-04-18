@@ -1,20 +1,21 @@
 import { UserButton, useUser, SignInButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export function NavBar() {
   const user = useUser();
   return (
     <nav className="border-gray-200 bg-white dark:bg-gray-900">
       <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
-        <a href="https://flowbite.com/" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="mr-3 h-8"
             alt="Flowbite Logo"
           />
-          <span className="self-center whitespace-nowrap text-2xl font-semibold dark:text-white">
-            Flowbite
+          <span className="self-center whitespace-nowrap text-3xl font-extrabold dark:text-white">
+            OMP
           </span>
-        </a>
+        </Link>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -40,57 +41,43 @@ export function NavBar() {
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul className="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 font-medium dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="block rounded bg-blue-700 py-2 pl-3 pr-4 text-white dark:text-white md:bg-transparent md:p-0 md:text-blue-700 md:dark:text-blue-500"
                 aria-current="page"
               >
                 Home
-              </a>
+              </Link>
             </li>
-            <li>
-              <a
-                href="#"
-                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-              >
-                About
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-              >
-                Services
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-              >
-                Pricing
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
-              >
-                Contact
-              </a>
-            </li>
-            <li></li>
+            {user.isSignedIn && (
+              <li>
+                <Link
+                  href="/sell-an-item"
+                  className="block rounded py-2 pl-3 pr-4 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:bg-transparent md:dark:hover:text-blue-500"
+                >
+                  Sell an Item
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         {user.isSignedIn ? (
           <UserButton />
         ) : (
-          <SignInButton>
-            <span className="cursor-pointer rounded-md bg-slate-950 px-4 py-2 text-white">
-              SignIn
-            </span>
-          </SignInButton>
+          <div className="flex flex-row items-center justify-between gap-2">
+            <Link
+              href="/sign-up"
+              className="cursor-pointer rounded-md border border-slate-950 px-4 py-2 text-slate-950"
+            >
+              Sign Up
+            </Link>
+            <Link
+              href="/sign-in"
+              className="cursor-pointer rounded-md bg-slate-950 px-4 py-2 text-white"
+            >
+              Login
+            </Link>
+          </div>
         )}
       </div>
     </nav>

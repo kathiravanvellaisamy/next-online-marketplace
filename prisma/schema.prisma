@@ -18,4 +18,23 @@ model Listing {
     name String
     description String
     price Float
+    message Message[]
 }
+
+model Message {
+    id        String   @id @default(cuid())     
+    fromUser String
+    fromUserName String    
+    listingId String
+    message String
+    listing Listing @relation(fields: [listingId],references: [id])
+}
+
+
+
+
+
+
+
+
+

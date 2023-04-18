@@ -8,6 +8,8 @@ import {
   ReactFragment,
   ReactPortal,
 } from "react";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 
 import { api } from "~/utils/api";
 
@@ -72,12 +74,12 @@ const Home: NextPage = () => {
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
                   $ {listing.price}
                 </p>
-                <a
-                  href="#"
-                  className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                <Link
+                  href={`/listings/${listing.id}`}
+                  className="inline-flex items-center rounded-lg bg-slate-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Buy Now
-                </a>
+                </Link>
               </div>
             )
           )}
